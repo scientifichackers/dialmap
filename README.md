@@ -14,6 +14,8 @@ Then this library is just for you.
 
 It's a sub-100 line python script so, just copy-paste [dialmap.py](dialmap.py) and import it. 
 
+## Background
+
 ### The Problem
 
 Potentiometers always have some degree of jitter.
