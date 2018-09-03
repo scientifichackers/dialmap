@@ -1,6 +1,7 @@
 # Dial Map
 
 Ever had to deal with the horrible jitter associated with using Potentiometers with an ADC? 
+
 Then this library is just for you.
 
 *Dial Map lets you program "Dead Zones" into your Dials, eliminating the need for crazy software/hardware filters for removing jitter.*
