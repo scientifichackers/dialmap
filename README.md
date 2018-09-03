@@ -79,7 +79,7 @@ the interpreted value will remain stable at `1` as long as there is a jitter of 
 ```python
 from dialmap import DialMap
 
-my_dial_map = DialMap(output_pts=range(5), deadzone=5)
+my_dial_map = DialMap(output_pts=range(5), deadzone=20)
 ```
 
 - `deadzone` is in percentage. 
