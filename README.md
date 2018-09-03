@@ -16,15 +16,13 @@ It's a sub-100 line python script so, just copy-paste [dialmap.py](dialmap.py) a
 
 ## Background
 
-### The Problem
-
-Potentiometers always have some degree of jitter.
+Potentiometers *always* seem have some degree of jitter.
  
 It doesn't matter much in the Analog world,
 but when you want to use them for Digital (especially Software applications), 
 this is a *huge* headache.
 
-**Let's take an example**
+### The Problem
 
 We have an ADC that gives us the reading of potentiometer as an integer between `0` and `1000`, 
 and we want to map these values to a range between `1` and `5`. 
@@ -42,9 +40,9 @@ Raw Value:          0     200     400     600     800     1000
 
 *It's guaranteed that the potentiometer will have some amount of jitter, even when it's absolutely stationary.*
 
-Let's assume that the values are swinging around the `200` mark. (represented very creatively by the arrows)
+---
 
-You can immediately notice the problem here. 
+Let's assume that the values are swinging around the `200` mark. (represented very creatively by the arrows)
 
 Even the slightest amount of jitter will cause random switching between `1` and `2`, 
 causing unwanted behavior in our software.
