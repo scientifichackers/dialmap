@@ -1,5 +1,4 @@
 # Dial Map
-**Software controlled dials done right.**
 
 Ever had to deal with the horrible jitter associated with using Potentiometers with an ADC? 
 Then this library is just for you.
