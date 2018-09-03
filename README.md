@@ -74,7 +74,7 @@ Now even if there is jitter at the `200` mark,
 the interpreted value will remain stable at `1` as long as there is a jitter of `±5`.
 
 
-##### Example
+## Example
  
 ```python
 from dialmap import DialMap
