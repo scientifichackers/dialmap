@@ -58,7 +58,7 @@ However big or small the jitter, the fact that we have the concept of "breakpoin
 
 The solution, is to program "Dead Zones" into our mapping.
 
-When-ever the raw value reaches the "Dead Zone", our Software will stop responding.
+When-ever the raw value reaches the "Dead Zone", our Software should stop responding to changes.
 
 Here is a visual representation:
 
