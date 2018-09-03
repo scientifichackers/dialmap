@@ -1,8 +1,10 @@
 # Dial Map
-*Software controlled dials done right.*
+**Software controlled dials done right.**
 
-Ever had to deal with potentiometers, and their horrible jitter? 
+Ever had to deal with the horrible jitter associated with using Potentiometers with an ADC? 
 Then this library is just for you.
+
+*Dial Map lets you program "Dead Zones" into your Dials, eliminating the need for crazy software/hardware filters for removing jitter.*
 
 - Automatically normalizes the ADC's raw values.
 - 100% Dependency free, MicroPython compatible.
