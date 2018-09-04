@@ -127,16 +127,21 @@ class MultiDialMap:
         assert len(dial_inputs) == self._len, (
             "You must provide exactly %d inputs for this mapping" % self._len
         )
-        self._store = [
+        dial_inputs_adjusted = [
             store if input is None else input
             for input, store in zip(dial_inputs, self._store)
         ]
         dial_points = tuple(
-            int(nm.normalize(input)) for nm, input in zip(self._nm_list, self._store)
+            int(nm.normalize(input))
+            for nm, input in zip(self._nm_list, dial_inputs_adjusted)
         )
+
         try:
             self._cache = self.mapping[dial_points]
         except KeyError:
             pass
+        else:
+            # update the store if this was a valid input
+            self._store = dial_inputs_adjusted
 
         return self._cache
