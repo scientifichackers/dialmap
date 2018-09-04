@@ -6,7 +6,9 @@ Then this library is just for you.
 
 - Automatically normalizes the ADC's raw values.
 - 100% Dependency free, MicroPython compatible.
-- Fast, because of the magic that is static mappings.
+- Fast, because of the magical pre-computation it does. (Takes more memory though)
+  
+  *I'm talking `µs` level response times.*
 
 ## Install
 
@@ -90,11 +92,12 @@ my_dial_map = DialMap(output_pts=range(5), deadzone=5)
 Here is how you use this mapping:
 
 ```python
-my_dial_map.translate(150)
+my_dial_map[150]
 ```
 
 And that's it!
 
+---
 
 You can inspect the mapping like this:
 
@@ -109,11 +112,19 @@ dict_values([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1
 - `keys()` represent the normalized values.
 - `values()` represent the `output_pts` you asked for.
 
-The `DialMap.translate()` simply normalizes the input, and passes it through this mapping.
+---
+
+`DialMap.__getitem__()` simply normalizes the input, and passes it through this mapping.
 
 If a Dead Zone is encountered, (for e.g. `16` is a Dead Point above) then the last translated value is returned.
 
 ---
+
+```
+from dialmap import MultiDialMap
+d = MultiDialMap([[1, 10, 100], [2, 16, 150], [5, 20, 200], [10, 40, 300]], deadzone=0)
+```
+
 
 <a href="https://www.buymeacoffee.com/u75YezVri" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
