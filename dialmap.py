@@ -1,5 +1,5 @@
 class Normalizer:
-    def __init__(self, start=0, stop=1):
+    def __init__(self, start=0, stop=100):
         self.start, self.stop = start, stop
         self.min, self.max = 0, 0
 
@@ -53,7 +53,7 @@ def _gen_dial_points(dial_zones, output_items):
 
 class DialMap:
     def __init__(self, output_items, deadzone=0, autosort=False):
-        self._cache = output_items[0]
+        self._store = output_items[0]
 
         count = len(output_items)
         self._nm = Normalizer(stop=count * 2 if count > 50 else 100)
@@ -70,10 +70,10 @@ class DialMap:
     def __getitem__(self, dial_input):
         dial_point = int(self._nm.normalize(dial_input))
         try:
-            self._cache = self.mapping[dial_point]
+            self._store = self.mapping[dial_point]
         except KeyError:
             pass
-        return self._cache
+        return self._store
 
 
 def product(pools):
@@ -85,7 +85,7 @@ def product(pools):
 
 class MultiDialMap:
     def __init__(self, mutli_output_items, deadzone=0, autosort=False):
-        self._cache = mutli_output_items[0]
+        self._outstore = mutli_output_items[0]
 
         self._nm_list = []
 
@@ -93,7 +93,7 @@ class MultiDialMap:
         self._len = len(transposed)
         self._range = range(self._len)
 
-        self._store = [0] * self._len
+        self._instore = [0] * self._len
 
         dial_point_map = []
         for output_points in transposed:
@@ -125,11 +125,12 @@ class MultiDialMap:
 
     def __getitem__(self, dial_inputs):
         assert len(dial_inputs) == self._len, (
-            "You must provide exactly %d inputs for this mapping" % self._len
+            "You must provide exactly `%d` inputs for this mapping. You may provide `None` as an input."
+            % self._len
         )
         dial_inputs_adjusted = [
             store if input is None else input
-            for input, store in zip(dial_inputs, self._store)
+            for input, store in zip(dial_inputs, self._instore)
         ]
         dial_points = tuple(
             int(nm.normalize(input))
@@ -137,11 +138,11 @@ class MultiDialMap:
         )
 
         try:
-            self._cache = self.mapping[dial_points]
+            self._outstore = self.mapping[dial_points]
         except KeyError:
             pass
         else:
             # update the store if this was a valid input
-            self._store = dial_inputs_adjusted
+            self._instore = dial_inputs_adjusted
 
-        return self._cache
+        return self._outstore
